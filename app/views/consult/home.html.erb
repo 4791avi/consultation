@@ -1,0 +1,105 @@
+<div id="div1">
+  <div class="col-md-6 col-md-offset-3">
+
+  <%= form_for :patient_new , url: {action: "create_patient"} do |form| %>
+ <h3><u> Patient </u> </h3>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name,placeholder: "Name",:required => true %>
+  </p>
+ 
+  <p>
+    <%= form.label :phone_no %><br>
+    <%= form.text_field :phone_no,placeholder: "Phone Number",:required => true %>
+  </p>
+ 
+  <p>
+    <%= form.submit "Submit" %>
+  </p>
+
+  <%end%>
+  
+
+</div>
+</div>
+<div id="div2">
+    <div class="col-md-6 col-md-offset-3">
+  <%= form_for :new_doctor, url: {action: "create_doctor"} do |form| %>
+ <h3><u> Doctor </u></h3>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name,placeholder: "Name",:required => true %>
+  </p>
+ 
+  <p>
+    <%= form.label :phone_no %><br>
+    <%= form.text_field :phone_no,placeholder: "Phone Number",:required => true %>
+  </p>
+  
+    <p>
+    <%= form.label :specialization %><br>
+    <%= form.text_field :specialization,placeholder: "specialization",:required => true %>
+  </p>
+ 
+  <p>
+    <%= form.submit "Submit" %>
+  </p>
+
+  <%end%>
+</div>
+</div>
+<div id="div3">
+    <div class="col-md-6 col-md-offset-3">
+   <%= form_for :new_appointment, url: {action: "create_appointment"} do |form| %>
+    <h3><u> Appointment </u> </h3>
+  <p>
+    <%= form.label :doc_name %><br>
+    <%= form.collection_select(:doc_name, Doctor.all, :name,:name, prompt: true) %>
+  </p>
+ 
+  <p>
+    <%= form.label :pat_name %><br>
+    <%= form.collection_select(:pat_name, Patient.all, :name,:name, prompt: true) %>
+  </p>
+  
+  <p>
+    <%= form.label :diseases %><br>
+    <%= form.text_field :diseases,placeholder: "diseases",:required => true %>
+  </p>
+ 
+  <p>
+    <%= form.submit "Submit" %>
+  </p>
+
+  <%end%>
+  </div>
+</div>
+<div id="div4">
+    <div class="col-md-6 col-md-offset-3">
+  <h3><u> View Appointment  </u></h3>
+  <table border= '1'>
+    <tr>
+      <th>Doctor Name</th>
+      <th>Patient Name</th>
+      <th>Diseases</th>
+    </tr>
+    <% @appointment.each do |app| %>
+    <tr>
+      <td><%=app.doc_name %></td>
+      <td><%=app.pat_name %></td>
+      <td><%=app.diseases %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+</div>
+
+<style>
+table { width: 340px; } /* Make table wider */  
+td, th { border: 1px solid #CCC; } 
+
+th {  
+    background: #DFDFDF;  /* Darken header a bit */
+    font-weight: bold;
+}
+</style>
